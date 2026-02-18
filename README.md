@@ -55,3 +55,21 @@ It helps show why ECB is insecure for structured data (pattern leakage) and why 
 ├── index.html
 ├── package.json
 └── vite.config.ts
+```
+
+### How it works
+
+- User uploads an image on frontend.
+
+- Frontend sends multipart/form-data to backend /process.
+
+### Backend:
+  - Reads image bytes (RGB)
+  - Generates AES key
+  - Encrypts bytes with ECB and CBC
+  - Decrypts both for verification
+  - Saves generated images
+    
+- Backend returns image paths in JSON.
+
+- Frontend displays all outputs for comparison.
