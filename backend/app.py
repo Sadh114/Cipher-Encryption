@@ -2,12 +2,14 @@ from flask import Flask, request, jsonify, send_from_directory
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 from Crypto.Random import get_random_bytes
+from flask_cors import CORS
 from PIL import Image
 import numpy as np
 import os
 import uuid
 
 app = Flask(__name__)
+CORS(app) 
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'backend', 'uploads')
 PROCESSED_FOLDER = os.path.join(os.getcwd(), 'backend', 'processed')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -104,5 +106,12 @@ def uploaded_file(filename):
 def processed_file(filename):
     return send_from_directory(PROCESSED_FOLDER, filename)
 
+@app.route("/health")
+def health():
+    return {"ok": True}, 200
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
+    
+

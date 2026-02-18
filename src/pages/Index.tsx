@@ -14,6 +14,9 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Lock } from "lucide-react";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
+
+
 const Index = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [originalImage, setOriginalImage] = useState<string | null>(null);
@@ -50,7 +53,7 @@ const Index = () => {
       const formData = new FormData();
       formData.append('image', selectedFile);
 
-      const response = await fetch('/api/process', {
+      const response = await fetch('${API_BASE}/process', {
         method: 'POST',
         body: formData,
       });
@@ -62,11 +65,11 @@ const Index = () => {
       const result = await response.json();
 
       // Set the image URLs
-      setOriginalImage('/api' + result.original);
-      setEcbImage('/api' + result.ecb_encrypted);
-      setCbcImage('/api' + result.cbc_encrypted);
-      setEcbDecrypted('/api' + result.ecb_decrypted);
-      setCbcDecrypted('/api' + result.cbc_decrypted);
+      setOriginalImage(`${API_BASE}${result.original}`);
+      setEcbImage(`${API_BASE}${result.ecb_encrypted}`);
+      setCbcImage(`${API_BASE}${result.cbc_encrypted}`);
+      setEcbDecrypted(`${API_BASE}${result.ecb_decrypted}`);
+      setCbcDecrypted(`${API_BASE}${result.cbc_decrypted}`);
 
       toast.success("Image processed successfully! Notice the difference between ECB and CBC modes.");
     } catch (error) {
