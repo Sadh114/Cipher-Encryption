@@ -53,7 +53,7 @@ const Index = () => {
       const formData = new FormData();
       formData.append('image', selectedFile);
 
-      const response = await fetch('${API_BASE}/process', {
+      const response = await fetch(`${API_BASE}/process`, {
         method: 'POST',
         body: formData,
       });
