@@ -45,7 +45,7 @@ export const ComparisonDisplay = ({
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                No encryption yet
+                No encryption yet - please wait for 20-30 seconds 
               </div>
             )}
           </div>
@@ -71,7 +71,7 @@ export const ComparisonDisplay = ({
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                No encryption yet
+                No encryption yet - please wait for 20-30 seconds 
               </div>
             )}
           </div>
